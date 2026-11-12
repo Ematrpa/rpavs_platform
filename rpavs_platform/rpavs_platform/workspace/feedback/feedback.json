@@ -1,0 +1,72 @@
+{
+ "app": "rpavs_platform",
+ "charts": [
+  {
+   "label": "Feedback Trend",
+   "chart_name": "Feedback Trend"
+  },
+  {
+   "label": "Feedback by Category",
+   "chart_name": "Feedback by Category"
+  },
+  {
+   "label": "Feedback by Status",
+   "chart_name": "Feedback by Status"
+  }
+ ],
+ "content": "[{\"id\": \"fb_nc_total\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Total Feedback\", \"col\": 4}}, {\"id\": \"fb_nc_new\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"New Feedback\", \"col\": 4}}, {\"id\": \"fb_nc_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Feedback This Month\", \"col\": 4}}, {\"id\": \"fb_shortcut\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Platform Feedback\", \"col\": 3}}, {\"id\": \"fb_spacer\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"fb_ch_trend\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Feedback Trend\", \"col\": 12}}, {\"id\": \"fb_ch_cat\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Feedback by Category\", \"col\": 6}}, {\"id\": \"fb_ch_status\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Feedback by Status\", \"col\": 6}}]",
+ "creation": "2026-11-12 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "message-square",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Feedback",
+ "links": [],
+ "modified": "2026-11-12 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RPAVS Platform",
+ "name": "Feedback",
+ "number_cards": [
+  {
+   "label": "Total Feedback",
+   "number_card_name": "Total Feedback"
+  },
+  {
+   "label": "New Feedback",
+   "number_card_name": "New Feedback"
+  },
+  {
+   "label": "Feedback This Month",
+   "number_card_name": "Feedback This Month"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Feedback Reviewer"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 50.0,
+ "shortcuts": [
+  {
+   "label": "Platform Feedback",
+   "link_to": "Platform Feedback",
+   "type": "DocType",
+   "doc_view": "List",
+   "color": "Blue",
+   "stats_filter": "[[\"Platform Feedback\", \"status\", \"=\", \"New\", false]]"
+  }
+ ],
+ "title": "Feedback",
+ "type": "Workspace"
+}

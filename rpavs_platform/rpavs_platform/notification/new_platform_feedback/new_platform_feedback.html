@@ -1,0 +1,13 @@
+<p>New feedback was submitted from the RPAVS platform.</p>
+
+<table border="0" cellpadding="4" cellspacing="0">
+	<tr><td><b>Title</b></td><td>{{ doc.title | e }}</td></tr>
+	<tr><td><b>Category</b></td><td>{{ doc.category | e }}</td></tr>
+	<tr><td><b>Submitted by</b></td><td>{{ (doc.submitter_name or doc.submitted_by) | e }}{% if doc.company %} ({{ doc.company | e }}){% endif %}</td></tr>
+	<tr><td><b>Date</b></td><td>{{ frappe.utils.format_datetime(doc.submitted_on) }}</td></tr>
+</table>
+
+<p><b>Description</b></p>
+<p style="white-space: pre-wrap">{{ doc.description | e }}</p>
+
+<p><a href="{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}">Open {{ doc.name }} in ERPNext</a></p>
