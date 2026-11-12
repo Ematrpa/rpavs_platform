@@ -15,8 +15,8 @@ creates a **Platform Feedback** record with the user's own ERPNext token.
 - **Submitter:** `submitted_by`, `submitted_on`, `employee` and `company` are set by
   the server from the session. Values sent by the client are ignored, and reviewers
   cannot change them later.
-- **Permissions:** Client Supervisor and Client Admin can create feedback and read
-  their own records. **Feedback Reviewer** reads and updates all of them.
+- **Permissions:** any logged-in user (role **All**: Client Admin, Client Supervisor,
+  contractors, ...) can create feedback and read their own records. **Feedback Reviewer** reads and updates all of them.
   System Manager has full access.
 - **Email:** the standard Notification **New Platform Feedback** emails every user
   with the **Feedback Reviewer** role. To change who gets it, add or remove the role

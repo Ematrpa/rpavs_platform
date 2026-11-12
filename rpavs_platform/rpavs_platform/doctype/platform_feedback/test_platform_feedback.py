@@ -11,6 +11,7 @@ IGNORE_TEST_RECORD_DEPENDENCIES = ["User", "Employee", "Company"]
 SUPERVISOR = "feedback_supervisor@platform.test"
 OTHER_SUPERVISOR = "feedback_other@platform.test"
 REVIEWER = "feedback_reviewer@platform.test"
+CONTRACTOR = "feedback_contractor@platform.test"
 
 
 def make_user(email, role):
@@ -102,6 +103,21 @@ class TestPlatformFeedback(IntegrationTestCase):
         visible = frappe.get_list("Platform Feedback", pluck="name")
         self.assertIn(theirs, visible)
         self.assertNotIn(mine, visible)
+
+    def test_any_logged_in_user_can_submit(self):
+        # A contractor has only Employee Self Service, no client role.
+        frappe.set_user("Administrator")
+        make_user(CONTRACTOR, "Employee Self Service")
+        frappe.set_user(CONTRACTOR)
+        doc = new_feedback()
+
+        self.assertEqual(doc.submitted_by, CONTRACTOR)
+        self.assertIsNone(doc.employee)
+        self.assertIn(doc.name, frappe.get_list("Platform Feedback", pluck="name"))
+
+    def test_guest_cannot_submit(self):
+        frappe.set_user("Guest")
+        self.assertRaises(frappe.PermissionError, new_feedback)
 
     def test_reviewer_cannot_change_submitter(self):
         doc = new_feedback()
