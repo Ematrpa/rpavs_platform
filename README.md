@@ -24,6 +24,31 @@ creates a **Platform Feedback** record with the user's own ERPNext token.
 - **Metrics:** the **Feedback** workspace shows Total / New / This Month number cards
   plus Trend, By Category and By Status charts.
 
+## Hiring Requests (RPAVS-44)
+
+Client Admins tell Recruiting about an upcoming contractor position from the
+"Planning to add a new contractor?" card on the platform dashboard, or from the
+**Hiring Requests** page. The Django proxy (`POST /api/hiring-requests/`) creates a
+**Hiring Request** with the user's own ERPNext token.
+
+- **Fields:** Position Title, Experience Level, Location, Expected Start Date, Required
+  Skills, Additional Notes, Status (New → In Review → Sourcing → Filled / Closed),
+  Internal Notes (only recruiters can see them).
+- **Submitter:** set by the server from the session, same as Platform Feedback.
+- **Permissions:** only **Client Admin** can create requests, and they only read their own.
+  **Recruiter** reads and updates all of them. System Manager has full access.
+- **Experience levels:** the **Hiring Experience Level** list (Junior, Mid, Senior at first).
+  Recruiters add, rename, reorder (Display Order) or disable levels from the desk; the
+  platform form picks up the change with no deploy. The defaults are only inserted
+  while the list is empty.
+- **Email:** every enabled row in **Hiring Request Settings → Email New Requests To**
+  gets each new request (template `templates/emails/new_hiring_request.html`). Recruiter and
+  System Manager edit the list from the desk: add rows, or untick Enabled to pause someone.
+  It starts with scortez@rpapm.com, added once on install or by the v0_2 patch; it is not
+  refilled later, and an empty list sends no email.
+- **Desk:** the **Hiring Requests** workspace (Recruiter, System Manager), with links to
+  requests, experience levels and settings.
+
 ## Install
 
 Frappe Cloud: push this folder to its own GitHub repo, add it to the bench

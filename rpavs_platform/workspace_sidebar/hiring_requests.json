@@ -1,0 +1,65 @@
+{
+ "app": "rpavs_platform",
+ "creation": "2026-11-12 18:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Workspace Sidebar",
+ "header_icon": "briefcase",
+ "idx": 0,
+ "items": [
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "home",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Home",
+   "link_to": "Hiring Requests",
+   "link_type": "Workspace",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "briefcase",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Hiring Request",
+   "link_to": "Hiring Request",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "list",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Experience Levels",
+   "link_to": "Hiring Experience Level",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "settings",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "Settings",
+   "link_to": "Hiring Request Settings",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-11-12 20:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RPAVS Platform",
+ "name": "Hiring Requests",
+ "owner": "Administrator",
+ "standard": 1,
+ "title": "Hiring Requests"
+}

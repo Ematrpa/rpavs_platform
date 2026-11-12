@@ -1,0 +1,20 @@
+<p>A new hiring request was submitted from the RPAVS platform.</p>
+
+<table border="0" cellpadding="4" cellspacing="0">
+	<tr><td><b>Position</b></td><td>{{ doc.position_title | e }}</td></tr>
+	<tr><td><b>Experience level</b></td><td>{{ doc.experience_level | e }}</td></tr>
+	<tr><td><b>Location</b></td><td>{{ doc.location | e }}</td></tr>
+	<tr><td><b>Expected start</b></td><td>{% if doc.expected_start_date %}{{ frappe.utils.format_date(doc.expected_start_date) }}{% else %}Not specified{% endif %}</td></tr>
+	<tr><td><b>Submitted by</b></td><td>{{ (doc.submitter_name or doc.submitted_by) | e }}{% if doc.company %} ({{ doc.company | e }}){% endif %}</td></tr>
+	<tr><td><b>Date</b></td><td>{{ frappe.utils.format_datetime(doc.submitted_on) }}</td></tr>
+</table>
+
+<p><b>Required skills</b></p>
+<p style="white-space: pre-wrap">{{ doc.skills | e }}</p>
+
+{% if doc.notes %}
+<p><b>Additional notes</b></p>
+<p style="white-space: pre-wrap">{{ doc.notes | e }}</p>
+{% endif %}
+
+<p><a href="{{ frappe.utils.get_url_to_form(doc.doctype, doc.name) }}">Open {{ doc.name }} in ERPNext</a></p>

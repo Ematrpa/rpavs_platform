@@ -1,0 +1,60 @@
+{
+ "app": "rpavs_platform",
+ "charts": [],
+ "content": "[{\"id\": \"hr_sc_requests\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hiring Request\", \"col\": 3}}, {\"id\": \"hr_sc_levels\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hiring Experience Level\", \"col\": 3}}, {\"id\": \"hr_sc_settings\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Hiring Request Settings\", \"col\": 3}}]",
+ "creation": "2026-11-12 18:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "briefcase",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Hiring Requests",
+ "links": [],
+ "modified": "2026-11-12 20:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RPAVS Platform",
+ "name": "Hiring Requests",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Recruiter"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 51.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Hiring Request",
+   "link_to": "Hiring Request",
+   "stats_filter": "[[\"Hiring Request\", \"status\", \"=\", \"New\", false]]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Hiring Experience Level",
+   "link_to": "Hiring Experience Level",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "label": "Hiring Request Settings",
+   "link_to": "Hiring Request Settings",
+   "type": "DocType"
+  }
+ ],
+ "title": "Hiring Requests",
+ "type": "Workspace"
+}

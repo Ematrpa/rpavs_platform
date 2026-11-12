@@ -1,0 +1,27 @@
+{
+ "app": "rpavs_platform",
+ "creation": "2026-11-12 18:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "briefcase",
+ "icon_type": "Link",
+ "idx": 0,
+ "label": "Hiring Requests",
+ "link_to": "Hiring Requests",
+ "link_type": "Workspace Sidebar",
+ "modified": "2026-11-12 18:00:00.000000",
+ "modified_by": "Administrator",
+ "name": "Hiring Requests",
+ "owner": "Administrator",
+ "restrict_removal": 0,
+ "roles": [
+  {
+   "role": "Recruiter"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "standard": 1
+}

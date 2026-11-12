@@ -9,4 +9,5 @@ required_apps = ["erpnext"]
 
 # Roles must exist before the DocType permissions that reference them are synced.
 before_install = "rpavs_platform.install.ensure_roles"
-after_migrate = "rpavs_platform.install.ensure_roles"
+after_install = "rpavs_platform.install.after_install"
+after_migrate = "rpavs_platform.install.after_migrate"

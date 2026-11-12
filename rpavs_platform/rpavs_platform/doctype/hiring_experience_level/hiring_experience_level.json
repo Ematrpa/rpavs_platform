@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "autoname": "field:level_name",
+ "creation": "2026-11-12 18:00:00.000000",
+ "description": "Experience levels offered in the RPAVS Hiring Request form (RPAVS-44). Disabled levels are hidden from the form.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "level_name",
+  "enabled",
+  "display_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "level_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Level",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Enabled"
+  },
+  {
+   "default": "0",
+   "description": "Lower numbers are listed first in the platform form.",
+   "fieldname": "display_order",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Display Order"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-12 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RPAVS Platform",
+ "name": "Hiring Experience Level",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Recruiter",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Client Admin"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "display_order",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1
+}
