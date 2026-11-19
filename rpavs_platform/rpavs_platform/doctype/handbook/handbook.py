@@ -25,6 +25,24 @@ class Handbook(Document):
                 update_modified=False,
             )
 
+    def after_rename(self, old, new, merge=False):
+        # A rename corrects the version label of the same document: Frappe already
+        # updated `version` and the progress links, so keep the stored label in step.
+        # (To make everyone read it again, a new Handbook is created instead.)
+        frappe.db.set_value(
+            "Handbook Read Progress",
+            {"handbook": new},
+            "handbook_version",
+            new,
+            update_modified=False,
+        )
+        self.add_comment(
+            "Info",
+            _("Version renamed from {0} to {1}; existing reading progress and acknowledgments were kept.").format(
+                old, new
+            ),
+        )
+
     def validate_file(self):
         if not self.file.startswith("/private/files/"):
             frappe.throw(_("The handbook PDF must be uploaded as a private file."))

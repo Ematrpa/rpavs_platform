@@ -32,7 +32,7 @@
    "reqd": 1
   },
   {
-   "description": "For example 2026.11. Each version keeps its own reading progress and acknowledgments.",
+   "description": "For example 2027. Each version keeps its own reading progress and acknowledgments. To correct it after saving, click the title and use Rename; existing progress moves to the new name. To make everyone read it again, create a new Handbook instead.",
    "fieldname": "version",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -102,7 +102,7 @@
    "link_fieldname": "handbook"
   }
  ],
- "modified": "2026-11-19 12:00:00.000000",
+ "modified": "2026-11-19 18:00:00.000000",
  "modified_by": "Administrator",
  "module": "RPAVS Platform",
  "name": "Handbook",
@@ -138,5 +138,6 @@
  "sort_order": "DESC",
  "states": [],
  "title_field": "title",
- "track_changes": 1
+ "track_changes": 1,
+ "allow_rename": 1
 }

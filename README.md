@@ -57,7 +57,7 @@ ERPNext, so back office can prove who read which version and when.
 
 - **Handbook:** title, version, PDF (must be a private file; the page count is read
   from it), acknowledgment text, and **Excluded Companies**. Only one handbook is
-  Active; activating one deactivates the others. Version "2026" is created once from
+  Active; activating one deactivates the others. Version "2027" is created once from
   `data/RPA_Virtual_Staffing_Handbook.pdf` (install or the v0_3 patch), excluding
   Real Property Associates Property Management, Real Property Funding Group,
   RPA Maintenance, RPA Brokerage and RPA Virtual Staffing.
@@ -77,6 +77,8 @@ ERPNext, so back office can prove who read which version and when.
   them. HR Manager manages handbooks and reads progress. System Manager has full access.
 - **New version:** create a new Handbook (new version, private PDF, same exclusions)
   and mark it Active. Everyone must read and acknowledge it again; earlier records stay.
+- **Fix a wrong version label:** click the title → Rename. Existing progress and
+  acknowledgments move to the new name (same document, nothing to read again).
 - **Hide it:** untick Active on the handbook.
 
 Give the **HR Manager** role to the back office users who check handbook progress.

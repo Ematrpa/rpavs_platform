@@ -212,6 +212,22 @@ class TestHandbook(IntegrationTestCase):
         self.assertEqual(data["handbook"]["version"], "t-2")
         self.assertEqual(data["progress"]["status"], "Not Started")
 
+    def test_rename_corrects_version_and_keeps_progress(self):
+        frappe.set_user(CONTRACTOR)
+        api.record_page(1)
+        frappe.set_user("Administrator")
+
+        frappe.rename_doc("Handbook", "t-1", "t-1b")
+
+        self.assertEqual(frappe.db.get_value("Handbook", "t-1b", "version"), "t-1b")
+        progress = frappe.get_doc("Handbook Read Progress", {"employee": self.employee})
+        self.assertEqual((progress.handbook, progress.handbook_version), ("t-1b", "t-1b"))
+
+        frappe.set_user(CONTRACTOR)
+        data = api.get_my_handbook()
+        self.assertEqual(data["handbook"]["version"], "t-1b")
+        self.assertEqual(data["progress"]["max_page_reached"], 1)
+
     def test_employee_cannot_read_progress_records_directly(self):
         frappe.set_user(CONTRACTOR)
         api.record_page(1)

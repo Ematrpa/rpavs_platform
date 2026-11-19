@@ -25,7 +25,7 @@ DEFAULT_HIRING_REQUEST_RECIPIENTS = ("scortez@rpapm.com",)
 HANDBOOK_PDF = "data/RPA_Virtual_Staffing_Handbook.pdf"
 DEFAULT_HANDBOOK = {
     "title": "RPA Virtual Staffing Contractor Handbook",
-    "version": "2026",
+    "version": "2027",
 }
 # The RPA companies have their own handbook; their employees do not see this one.
 HANDBOOK_EXCLUDED_COMPANIES = (
