@@ -1,3 +1,5 @@
+import os
+
 import frappe
 
 ROLES = {
@@ -18,6 +20,23 @@ DEFAULT_EXPERIENCE_LEVELS = ("Junior", "Mid", "Senior")
 DEFAULT_HIRING_REQUEST_RECIPIENTS = ("scortez@rpapm.com",)
 
 
+# RPAVS-56. First contractor handbook, shipped with the app. HR publishes later
+# versions from the desk (new Handbook record, marked Active).
+HANDBOOK_PDF = "data/RPA_Virtual_Staffing_Handbook.pdf"
+DEFAULT_HANDBOOK = {
+    "title": "RPA Virtual Staffing Contractor Handbook",
+    "version": "2026",
+}
+# The RPA companies have their own handbook; their employees do not see this one.
+HANDBOOK_EXCLUDED_COMPANIES = (
+    "Real Property Associates Property Management",
+    "Real Property Funding Group",
+    "RPA Maintenance",
+    "RPA Brokerage",
+    "RPA Virtual Staffing",
+)
+
+
 def ensure_roles():
     for role_name, props in ROLES.items():
         if not frappe.db.exists("Role", role_name):
@@ -29,6 +48,7 @@ def ensure_roles():
 def after_install():
     ensure_experience_levels()
     ensure_hiring_request_recipients()
+    ensure_handbook()
 
 
 def after_migrate():
@@ -57,3 +77,33 @@ def ensure_hiring_request_recipients():
     for email in DEFAULT_HIRING_REQUEST_RECIPIENTS:
         settings.append("notify_recipients", {"email": email, "enabled": 1})
     settings.save(ignore_permissions=True)
+
+
+def ensure_handbook():
+    """Create the first Handbook from the bundled PDF. Runs once (install or the v0_3 patch)."""
+    if frappe.db.count("Handbook"):
+        return
+
+    file_name = HANDBOOK_PDF.rsplit("/", 1)[-1]
+    # Not get_app_path(app, HANDBOOK_PDF): it lowercases the path and the file name.
+    with open(os.path.join(frappe.get_app_path("rpavs_platform"), HANDBOOK_PDF), "rb") as f:
+        file_doc = frappe.get_doc(
+            {"doctype": "File", "file_name": file_name, "is_private": 1, "content": f.read()}
+        ).insert(ignore_permissions=True)
+
+    handbook = frappe.get_doc(
+        {
+            "doctype": "Handbook",
+            **DEFAULT_HANDBOOK,
+            "is_active": 1,
+            "file": file_doc.file_url,
+            "excluded_companies": [
+                {"company": company}
+                for company in HANDBOOK_EXCLUDED_COMPANIES
+                # Test and fresh sites do not have the RPA companies.
+                if frappe.db.exists("Company", company)
+            ],
+        }
+    ).insert(ignore_permissions=True)
+
+    file_doc.db_set({"attached_to_doctype": "Handbook", "attached_to_name": handbook.name})

@@ -1,0 +1,142 @@
+{
+ "actions": [],
+ "autoname": "field:version",
+ "creation": "2026-11-19 12:00:00.000000",
+ "description": "Contractor handbook shown in the RPAVS platform, with reading progress tracked per employee (RPAVS-56). Publishing a new version makes everyone read and acknowledge it again.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "handbook_section",
+  "title",
+  "version",
+  "column_break_active",
+  "is_active",
+  "total_pages",
+  "file_section",
+  "file",
+  "acknowledgment_text",
+  "audience_section",
+  "excluded_companies"
+ ],
+ "fields": [
+  {
+   "fieldname": "handbook_section",
+   "fieldtype": "Section Break",
+   "label": "Handbook"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "description": "For example 2026.11. Each version keeps its own reading progress and acknowledgments.",
+   "fieldname": "version",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Version",
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_active",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Only one handbook is active. Activating this one deactivates the others.",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Active"
+  },
+  {
+   "description": "Counted from the PDF when it is saved.",
+   "fieldname": "total_pages",
+   "fieldtype": "Int",
+   "label": "Total Pages",
+   "read_only": 1
+  },
+  {
+   "fieldname": "file_section",
+   "fieldtype": "Section Break",
+   "label": "Document"
+  },
+  {
+   "description": "PDF. It must be a private file; the platform serves it only to eligible employees.",
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "label": "PDF File",
+   "reqd": 1,
+   "set_only_once": 1
+  },
+  {
+   "default": "I confirm that I have read and understand the RPA Virtual Staffing Handbook, and I agree to follow the policies it describes.",
+   "description": "The statement the employee accepts on the last page. A copy is stored with each acknowledgment.",
+   "fieldname": "acknowledgment_text",
+   "fieldtype": "Small Text",
+   "label": "Acknowledgment Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audience_section",
+   "fieldtype": "Section Break",
+   "label": "Audience"
+  },
+  {
+   "description": "Employees of these companies do not see this handbook. Everyone else does.",
+   "fieldname": "excluded_companies",
+   "fieldtype": "Table",
+   "label": "Excluded Companies",
+   "options": "Handbook Excluded Company"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [
+  {
+   "link_doctype": "Handbook Read Progress",
+   "link_fieldname": "handbook"
+  }
+ ],
+ "modified": "2026-11-19 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RPAVS Platform",
+ "name": "Handbook",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

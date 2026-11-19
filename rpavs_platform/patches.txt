@@ -2,3 +2,4 @@
 
 [post_model_sync]
 rpavs_platform.patches.v0_2.seed_hiring_request_recipients
+rpavs_platform.patches.v0_3.seed_handbook

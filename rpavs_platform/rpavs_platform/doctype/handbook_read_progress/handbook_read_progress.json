@@ -1,0 +1,247 @@
+{
+ "actions": [],
+ "autoname": "HBP-.YYYY.-.#####",
+ "creation": "2026-11-19 12:00:00.000000",
+ "description": "How far an employee has read a handbook version in the RPAVS platform, and their acknowledgment (RPAVS-56). Written only by the platform; read-only in the desk.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_section",
+  "employee",
+  "employee_name",
+  "user",
+  "column_break_company",
+  "company",
+  "handbook",
+  "handbook_version",
+  "progress_section",
+  "status",
+  "progress_percent",
+  "column_break_pages",
+  "max_page_reached",
+  "last_page",
+  "total_pages",
+  "dates_section",
+  "first_opened_on",
+  "column_break_dates",
+  "last_activity_on",
+  "completed_on",
+  "acknowledgment_section",
+  "acknowledged",
+  "acknowledged_on",
+  "acknowledgment_text",
+  "column_break_ack",
+  "ip_address",
+  "user_agent"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_section",
+   "fieldtype": "Section Break",
+   "label": "Employee"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_company",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "handbook",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Handbook",
+   "options": "Handbook",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "handbook_version",
+   "fieldtype": "Data",
+   "label": "Handbook Version",
+   "read_only": 1
+  },
+  {
+   "fieldname": "progress_section",
+   "fieldtype": "Section Break",
+   "label": "Progress"
+  },
+  {
+   "default": "Not Started",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Not Started\nIn Progress\nRead\nAcknowledged",
+   "read_only": 1
+  },
+  {
+   "fieldname": "progress_percent",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Progress",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_pages",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Furthest page the employee has opened. It never goes down.",
+   "fieldname": "max_page_reached",
+   "fieldtype": "Int",
+   "label": "Furthest Page Reached",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Page they were on last, where the reader resumes.",
+   "fieldname": "last_page",
+   "fieldtype": "Int",
+   "label": "Last Page Viewed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_pages",
+   "fieldtype": "Int",
+   "label": "Total Pages",
+   "read_only": 1
+  },
+  {
+   "fieldname": "dates_section",
+   "fieldtype": "Section Break",
+   "label": "Dates"
+  },
+  {
+   "fieldname": "first_opened_on",
+   "fieldtype": "Datetime",
+   "label": "First Opened On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_dates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_activity_on",
+   "fieldtype": "Datetime",
+   "label": "Last Activity On",
+   "read_only": 1
+  },
+  {
+   "description": "When the employee first reached the last page.",
+   "fieldname": "completed_on",
+   "fieldtype": "Datetime",
+   "label": "Completed On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "acknowledgment_section",
+   "fieldtype": "Section Break",
+   "label": "Acknowledgment"
+  },
+  {
+   "default": "0",
+   "fieldname": "acknowledged",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Acknowledged",
+   "read_only": 1
+  },
+  {
+   "fieldname": "acknowledged_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Acknowledged On",
+   "read_only": 1
+  },
+  {
+   "description": "The exact statement the employee accepted.",
+   "fieldname": "acknowledgment_text",
+   "fieldtype": "Small Text",
+   "label": "Accepted Statement",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ack",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "label": "IP Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "user_agent",
+   "fieldtype": "Small Text",
+   "label": "Browser",
+   "read_only": 1
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-11-19 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "RPAVS Platform",
+ "name": "Handbook Read Progress",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager"
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "employee_name",
+ "track_changes": 1
+}

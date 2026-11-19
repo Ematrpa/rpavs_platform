@@ -49,6 +49,38 @@ Client Admins tell Recruiting about an upcoming contractor position from the
 - **Desk:** the **Hiring Requests** workspace (Recruiter, System Manager), with links to
   requests, experience levels and settings.
 
+## Contractor Handbook (RPAVS-56)
+
+Contractors read the handbook page by page in the platform (bookshelf icon next to the
+avatar, `/handbook`). Every page viewed and the final acknowledgment are stored in
+ERPNext, so back office can prove who read which version and when.
+
+- **Handbook:** title, version, PDF (must be a private file; the page count is read
+  from it), acknowledgment text, and **Excluded Companies**. Only one handbook is
+  Active; activating one deactivates the others. Version "2026" is created once from
+  `data/RPA_Virtual_Staffing_Handbook.pdf` (install or the v0_3 patch), excluding
+  Real Property Associates Property Management, Real Property Funding Group,
+  RPA Maintenance, RPA Brokerage and RPA Virtual Staffing.
+- **Who sees it:** every active Employee linked to the user whose company is not
+  excluded. Edit the exclusions from the desk; no deploy needed.
+- **Handbook Read Progress:** one record per employee and handbook version: furthest
+  page, last page, %, status (Not Started → In Progress → Read → Acknowledged),
+  first opened, last activity, completed, and on acknowledgment the date, IP address,
+  browser and the exact statement accepted. Read-only in the desk, with change
+  history. Progress never goes back and an acknowledgment cannot be withdrawn.
+- **API** (`rpavs_platform.api.handbook`, called by the Django proxy with the user's
+  own token): `get_my_handbook`, `get_my_handbook_file`, `record_page` (pages must be
+  read in order), `acknowledge` (only after the last page), and
+  `get_progress_report` (HR Manager or System Manager; includes employees who never
+  opened it).
+- **Permissions:** employees have none on these DocTypes; the methods above act for
+  them. HR Manager manages handbooks and reads progress. System Manager has full access.
+- **New version:** create a new Handbook (new version, private PDF, same exclusions)
+  and mark it Active. Everyone must read and acknowledge it again; earlier records stay.
+- **Hide it:** untick Active on the handbook.
+
+Give the **HR Manager** role to the back office users who check handbook progress.
+
 ## Install
 
 Frappe Cloud: push this folder to its own GitHub repo, add it to the bench
