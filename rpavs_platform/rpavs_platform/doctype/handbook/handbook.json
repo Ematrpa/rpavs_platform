@@ -88,7 +88,7 @@
    "label": "Audience"
   },
   {
-   "description": "Employees of these companies do not see this handbook. Everyone else does.",
+   "description": "Employees of these companies do not see this handbook. Only Contract and Part-time employees of the other companies see it; supervisors never do.",
    "fieldname": "excluded_companies",
    "fieldtype": "Table",
    "label": "Excluded Companies",

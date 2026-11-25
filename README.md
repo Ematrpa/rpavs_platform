@@ -61,8 +61,11 @@ ERPNext, so back office can prove who read which version and when.
   `data/RPA_Virtual_Staffing_Handbook.pdf` (install or the v0_3 patch), excluding
   Real Property Associates Property Management, Real Property Funding Group,
   RPA Maintenance, RPA Brokerage and RPA Virtual Staffing.
-- **Who sees it:** every active Employee linked to the user whose company is not
-  excluded. Edit the exclusions from the desk; no deploy needed.
+- **Who sees it:** every active Employee linked to the user whose Employment Type is
+  **Contract** or **Part-time** and whose company is not excluded. Supervisors
+  (Employment Type = Supervisor) and employees with no type do not see it, and are
+  left out of the progress report. Edit the exclusions from the desk; no deploy
+  needed. The employment types are fixed in `api/handbook.py`.
 - **Handbook Read Progress:** one record per employee and handbook version: furthest
   page, last page, %, status (Not Started → In Progress → Read → Acknowledged),
   first opened, last activity, completed, and on acknowledgment the date, IP address,

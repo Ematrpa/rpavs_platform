@@ -3,8 +3,9 @@ Contractor handbook (RPAVS-56). The RPAVS platform shows the active Handbook pag
 page and calls these methods with the employee's own session. Every rule is enforced
 here, not in the client:
 
-- Eligibility: an active Employee linked to the session user, whose company is not
-  in the handbook's excluded companies.
+- Eligibility: an active Employee linked to the session user, whose employment type
+  is Contract or Part-time (supervisors do not see it), and whose company is not in
+  the handbook's excluded companies.
 - Pages are read in order; progress never goes backwards.
 - The acknowledgment is only accepted after the last page, and is stored with the
   date, IP address, browser and the exact statement accepted.
@@ -23,6 +24,9 @@ from rpavs_platform.rpavs_platform.doctype.handbook.handbook import get_file_con
 REPORT_ROLES = ("HR Manager", "System Manager")
 STATUSES = ("Not Started", "In Progress", "Read", "Acknowledged")
 USER_AGENT_MAX = 500
+# Only contractors and part-time contractors read the handbook; supervisors (also an
+# Employment Type) and employees without a type do not.
+ELIGIBLE_EMPLOYMENT_TYPES = ("Contract", "Part-time")
 
 PROGRESS_FIELDS = (
     "name",
@@ -51,13 +55,18 @@ def get_session_employee():
     return frappe.db.get_value(
         "Employee",
         {"user_id": frappe.session.user, "status": "Active"},
-        ["name", "employee_name", "company"],
+        ["name", "employee_name", "company", "employment_type"],
         as_dict=True,
     )
 
 
 def is_eligible(handbook, employee):
-    return bool(handbook and employee and employee.company not in handbook.excluded_company_names())
+    return bool(
+        handbook
+        and employee
+        and employee.employment_type in ELIGIBLE_EMPLOYMENT_TYPES
+        and employee.company not in handbook.excluded_company_names()
+    )
 
 
 def get_eligible_context():
@@ -230,7 +239,7 @@ def get_progress_report(company=None, status=None):
         return {"handbook": None, "summary": {s: 0 for s in STATUSES}, "rows": []}
 
     excluded = handbook.excluded_company_names()
-    filters = {"status": "Active"}
+    filters = {"status": "Active", "employment_type": ("in", ELIGIBLE_EMPLOYMENT_TYPES)}
     if company:
         filters["company"] = company
     employees = [

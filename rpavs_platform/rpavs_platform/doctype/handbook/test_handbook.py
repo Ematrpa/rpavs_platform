@@ -13,6 +13,8 @@ IGNORE_TEST_RECORD_DEPENDENCIES = ["User", "Employee", "Company"]
 
 CONTRACTOR = "handbook_contractor@platform.test"
 EXCLUDED_CONTRACTOR = "handbook_excluded@platform.test"
+PART_TIME = "handbook_parttime@platform.test"
+SUPERVISOR = "handbook_supervisor@platform.test"
 NO_EMPLOYEE = "handbook_noemployee@platform.test"
 HR = "handbook_hr@platform.test"
 
@@ -29,6 +31,16 @@ def make_user(email, role):
     user = frappe.get_doc("User", email)
     user.add_roles(role)
     return user
+
+
+def make_typed_employee(user, company, employment_type):
+    if not frappe.db.exists("Employment Type", employment_type):
+        frappe.get_doc({"doctype": "Employment Type", "employee_type_name": employment_type}).insert(
+            ignore_permissions=True
+        )
+    name = make_employee(user, company=company)
+    frappe.db.set_value("Employee", name, "employment_type", employment_type)
+    return name
 
 
 def make_pdf(pages):
@@ -70,10 +82,14 @@ class TestHandbook(IntegrationTestCase):
         frappe.db.delete("Handbook")
         make_user(CONTRACTOR, "Employee Self Service")
         make_user(EXCLUDED_CONTRACTOR, "Employee Self Service")
+        make_user(PART_TIME, "Employee Self Service")
+        make_user(SUPERVISOR, "Employee Self Service")
         make_user(NO_EMPLOYEE, "Employee Self Service")
         make_user(HR, "HR Manager")
-        self.employee = make_employee(CONTRACTOR, company=CLIENT_COMPANY)
-        self.excluded_employee = make_employee(EXCLUDED_CONTRACTOR, company=EXCLUDED_COMPANY)
+        self.employee = make_typed_employee(CONTRACTOR, CLIENT_COMPANY, "Contract")
+        self.excluded_employee = make_typed_employee(EXCLUDED_CONTRACTOR, EXCLUDED_COMPANY, "Contract")
+        self.part_time_employee = make_typed_employee(PART_TIME, CLIENT_COMPANY, "Part-time")
+        self.supervisor_employee = make_typed_employee(SUPERVISOR, CLIENT_COMPANY, "Supervisor")
         self.handbook = make_handbook("t-1")
 
     def tearDown(self):
@@ -117,6 +133,21 @@ class TestHandbook(IntegrationTestCase):
         self.assertEqual(api.get_my_handbook(), {"eligible": False})
         self.assertRaises(frappe.PermissionError, api.record_page, 1)
         self.assertRaises(frappe.PermissionError, api.get_my_handbook_file)
+
+    def test_part_time_contractor_is_eligible(self):
+        frappe.set_user(PART_TIME)
+        self.assertTrue(api.get_my_handbook()["eligible"])
+
+    def test_supervisor_is_not_eligible(self):
+        frappe.set_user(SUPERVISOR)
+        self.assertEqual(api.get_my_handbook(), {"eligible": False})
+        self.assertRaises(frappe.PermissionError, api.record_page, 1)
+        self.assertRaises(frappe.PermissionError, api.get_my_handbook_file)
+
+    def test_employee_without_employment_type_is_not_eligible(self):
+        frappe.db.set_value("Employee", self.employee, "employment_type", None)
+        frappe.set_user(CONTRACTOR)
+        self.assertEqual(api.get_my_handbook(), {"eligible": False})
 
     def test_user_without_employee_is_not_eligible(self):
         frappe.set_user(NO_EMPLOYEE)
@@ -246,6 +277,8 @@ class TestHandbook(IntegrationTestCase):
 
         self.assertEqual(by_employee[self.employee]["status"], "In Progress")
         self.assertNotIn(self.excluded_employee, by_employee)
+        self.assertNotIn(self.supervisor_employee, by_employee)
+        self.assertEqual(by_employee[self.part_time_employee]["status"], "Not Started")
         self.assertGreaterEqual(report["summary"]["In Progress"], 1)
 
         only_started = api.get_progress_report(status="In Progress")["rows"]
